@@ -9,7 +9,12 @@ use Overtrue\EasySms\EasySms;
 
 class VerificationCodesController extends Controller
 {
-    //
+
+    /**
+     * @param VerificationCodeRequest $request
+     * @param EasySms $easySms
+     * 生成并发送验证码
+     */
     public function store(VerificationCodeRequest $request, EasySms $easySms)
     {
         $phone = $request->get('phone');
@@ -18,6 +23,7 @@ class VerificationCodesController extends Controller
         $code = str_pad(random_int(1,9999), 4, 0, STR_PAD_LEFT);
 
         try{
+            // 发送信息
             $result = $easySms->send($phone, [
                'content' => "【Lbbs社区】您的验证码是{$code}。如非本人操作，请忽略本短信",
             ]);
@@ -27,6 +33,7 @@ class VerificationCodesController extends Controller
             return $this->response->errorInternal($result['msg'] ?? '短信发送异常');
         }
 
+        // 保存验证码到缓存
         $key = 'verificationCode_'.str_random(15);
         $expiredAt = now()->addMinutes(10);
         // 缓存验证码 10分钟过期
