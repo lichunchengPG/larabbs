@@ -24,6 +24,7 @@ class UsersController extends Controller
             return $this->response->error('验证已失效', 422);
         }
 
+        // 防止时序攻击
         if(!hash_equals($verifyData['code'], $data['verification_code'])){
             // 401
             return $this->response->errorUnauthorized('验证码错误');
