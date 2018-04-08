@@ -11,5 +11,6 @@ class Users extends Model
 
     protected $fillable = [
         'name', 'email', 'password', 'phone', 'introduction', 'avatar',
+        'weixin_openid', 'weixin_unionid'
     ];
 }
