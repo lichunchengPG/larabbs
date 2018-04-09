@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\Api\AuthorizationRequest;
 use App\Http\Requests\Api\SocialAuthorizationRequest;
 use App\Models\Users;
-use Dingo\Api\Auth\Auth;
 
 
 class AuthorizationsController extends Controller
