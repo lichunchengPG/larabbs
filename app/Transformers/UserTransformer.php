@@ -10,6 +10,7 @@ class UserTransformer extends TransformerAbstract
     protected $availableIncludes = ['roles'];
 
     public function transform(Users $user)
+
     {
         return [
             'id' => $user->id,

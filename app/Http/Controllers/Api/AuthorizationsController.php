@@ -6,7 +6,6 @@ use App\Http\Requests\Api\AuthorizationRequest;
 use App\Http\Requests\Api\SocialAuthorizationRequest;
 use App\Http\Requests\Api\WeappAuthorizationRequest;
 use App\Models\Users;
-use Dingo\Api\Auth\Auth;
 
 
 class AuthorizationsController extends Controller

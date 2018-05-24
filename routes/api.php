@@ -20,7 +20,8 @@ use Illuminate\Http\Request;
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', [
-    'namespace' => 'App\Http\Controllers\Api'
+    'namespace' => 'App\Http\Controllers\Api',
+    'middleware' => 'serializer:array'
 ], function ($api){
     // 中间件 频率限制
     $api->group([
@@ -64,7 +65,25 @@ $api->version('v1', [
             ->name('api.authorizations.destroy');
 
 
+
         $api->get('authorizations/test', 'AuthorizationsController@test');
+
+        // 需要token验证的接口
+        $api->group(['middleware' => 'api.auth'], function ($api){
+            // 获取当前登录用户信息
+            $api->get('user', 'UsersController@me')->name('api.user.show');
+
+            // 编辑登录用户信息
+            $api->patch('user', 'UsersController@update')
+                ->name('api.user.update');
+
+            // 图片资源
+            $api->post('images', 'ImagesController@store')
+                ->name('api.images.store');
+        });
+
+        $api->get('test', 'UsersController@test');
+
     });
 
 });
