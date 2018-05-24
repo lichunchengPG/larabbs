@@ -91,6 +91,10 @@ class AuthorizationsController extends Controller
     }
 
 
+    /**
+     * @param WeappAuthorizationRequest $request
+     * 小程序登陆
+     */
     public function weappStore(WeappAuthorizationRequest $request)
     {
         $code = $request->code;
